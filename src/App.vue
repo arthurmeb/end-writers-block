@@ -1,12 +1,23 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
   <router-view/>
-  <footer> By Beboo - Twitter | Email </footer>
+  <footer> Footer | By Beboo - Twitter | Email </footer>
 </template>
 
+<script>
+
+
+export default ({
+  setup() {
+
+    // define SSOT for user log in state (will base on firebase when integrated)
+
+    let loggedIn = false
+
+    return {loggedIn}
+  },
+})
+
+</script>
 
 
 <style>
@@ -20,6 +31,7 @@
 
 nav {
   padding: 30px;
+  border: 2px solid #000000;
 }
 
 nav a {
@@ -29,5 +41,9 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+footer {
+  border: 2px solid #000000;
 }
 </style>

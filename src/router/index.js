@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import DashboardView from '../views/DashboardView.vue'
+import PlaygroundView from '../views/PlaygroundView.vue'
 import SettingsView from '../views/SettingsView.vue'
 
 const routes = [
@@ -10,9 +10,9 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: DashboardView
+    path: '/playground',
+    name: 'playground',
+    component: PlaygroundView
   },
   {
     path: '/settings',
