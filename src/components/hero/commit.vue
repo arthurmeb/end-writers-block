@@ -1,1 +1,13 @@
-this is the set up commitment choices
+<template>
+  <div></div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>

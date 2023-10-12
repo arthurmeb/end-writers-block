@@ -60,4 +60,8 @@ nav a.router-link-exact-active {
 footer {
   border: 2px solid #000000;
 }
+
+.horizontal-group {
+  border: 2px solid #000000;
+}
 </style>

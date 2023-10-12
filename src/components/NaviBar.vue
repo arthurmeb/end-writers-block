@@ -17,6 +17,13 @@
         <router-link to="/settings" v-if="loggedIn && currentPage.path != '/settings'" >
             <button class=""> Settings </button>
         </router-link> 
+
+        
+        <!-- Show playground button whenever user loggedin && page is not playground-->
+
+        <router-link to="/playground" v-if="loggedIn && currentPage.path != '/playground'" >
+            <button class=""> Playground </button>
+        </router-link> 
         
     </nav>
 </template>
