@@ -6,7 +6,14 @@
 
 <script>
 
+import { useRoute } from 'vue-router'
+
 export default {
-  name: 'SettingsView'
+  name: 'SettingsView',
+
+  setup() {
+    console.log('App vue route is:' + useRoute().path)
+
+  }
 }
 </script>
