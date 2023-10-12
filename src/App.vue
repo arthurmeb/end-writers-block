@@ -35,6 +35,7 @@ export default ({
 
 
 <style>
+
 #app {
   font-family: Outfit, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -42,6 +43,8 @@ export default ({
   text-align: center;
   color: #2c3e50;
 }
+
+@import "~font-awesome/css/font-awesome.css";
 
 nav {
   padding: 30px;
