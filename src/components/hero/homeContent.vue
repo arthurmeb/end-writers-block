@@ -1,8 +1,8 @@
 <template>
       <div>
 
-        <i class="fa-solid fa-arrow-left" @click="handleBack" v-if="index >= 1"></i>
-        <p>current index: {{ index }}</p>
+        <i class="fas fa-arrow-left" @click="handleBack" v-if="index > 0"></i>
+        <p>current index: {{ index }} | current component: {{currentComponent[index]}}</p>
 
         <!-- Daily word choice group -->
         
@@ -13,7 +13,7 @@
             </div>
 
             <div class="tags" v-for="tag in wordsTags" :key="tag">
-                <button class="light btn" @click="handleForward">{{ tag }}</button>
+                <button class="light btn" @click="index++, console.log(index)">{{ tag }} {{ index }}</button>
             </div>
             <input class="custom-input" type="text" name="customWords" placeholder="Custom...">
         </div>
@@ -69,10 +69,11 @@ export default {
         // cycle through component views on button click
 
         const currentComponent = [wordsComponent, daysComponent, amountsComponent]
-        const index = 0
-        const handleForward = () => {currentComponent[index+1]}
-        const handleBack = () => {currentComponent[[index-1]]}
+        let index = ref(0)
+        const handleForward = () => {index.value++, console.log(index), console.log(currentComponent[index.value])}
+        const handleBack = () => {index.value--}
         
+ 
         // cycle to next component on custom input enter
 
         return {index, wordsTags, daysTags, amountsTags, handleForward, currentComponent, wordsComponent, daysComponent, amountsComponent, handleBack} 
@@ -83,4 +84,4 @@ export default {
 
 <style>
 
-</style>>
+</style>
