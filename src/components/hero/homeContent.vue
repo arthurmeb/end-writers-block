@@ -14,7 +14,7 @@
             </div>
 
             <div class="tags" v-for="tag in wordsTags" :key="tag">
-                <button class="light-btn" @click="handleForward">{{ tag }}</button>
+                <button class="light-btn" @click="handleForward(); handleWords(tag)">{{ tag }}</button>
             </div>
             <input class="custom-input" type="text" name="customWords" placeholder="Custom...">
         </div>
@@ -28,7 +28,7 @@
             </div>
 
             <div class="tags" v-for="tag in daysTags" :key="tag">
-                <button class="light-btn" @click="handleForward">{{ tag }}</button>
+                <button class="light-btn" @click="handleForward(); handleDays(tag)" >{{ tag }} days</button>
             </div>
             <input class="custom-input" type="text" name="customDays" placeholder="Custom...">
         </div>
@@ -42,7 +42,7 @@
             </div>
 
             <div class="tags" v-for="tag in amountsTags" :key="tag">
-                <button class="light-btn" @click="contentNext">{{ tag }}</button>
+                <button class="light-btn" @click="contentNext(); handleAmount(tag)">${{ tag }}</button>
 
             </div>
             <input class="custom-input" type="text" name="customAmount" placeholder="Custom...">
@@ -54,7 +54,7 @@
 import { ref } from 'vue'
 export default {
     props: ['contentNext', 'contentBack'],
-    setup(props){
+    setup(){
 
         // div group to reference when cycling on homeView
 
@@ -62,8 +62,8 @@ export default {
 
         // choice tags arrays
         const wordsTags = [250, 500, 750, 1000, 1500, 2000, 2500, 3000, 4000]
-        const daysTags = ['1 day', '2 days', '3 days', '5 days', '1 week', '2 weeks', '1 month', '2 months']
-        const amountsTags = ['$1', '$2', '$3', '$5', '$10', '$15', '$20', '$50']
+        const daysTags = [1, 2, 3, 4, 5, 14, 30, 60]
+        const amountsTags = [1, 2, 3, 5, 10, 15, 20, 50]
 
         // cycle through component views on button click
 
@@ -71,15 +71,23 @@ export default {
         const handleForward = () => {index.value++}
         const handleBack = () => {index.value--}
 
-        props.contentBack
-        props.contentNext
-        
- 
+
         // cycle to next component on custom input enter
 
-        // take user inputs and send to stripe api
+        // store user inputs from button clicks
 
-        return {index, wordsTags, daysTags, amountsTags, handleForward, amountsComponent, handleBack} 
+        let minWords = 0
+        let maxDays = 0
+        let dailyAmount = 0
+
+        
+        const handleWords = (tag) => {minWords = tag, console.log(minWords)}
+        const handleDays = (tag) => {maxDays = tag, console.log(maxDays)}
+        const handleAmount = (tag) => {dailyAmount = tag, console.log(dailyAmount)}
+
+
+
+        return {minWords, index, wordsTags, daysTags, amountsTags, handleForward, amountsComponent, handleBack, maxDays, dailyAmount, handleAmount, handleDays, handleWords} 
     }
 
 }

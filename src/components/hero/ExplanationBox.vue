@@ -7,7 +7,11 @@
 
 <script>
 export default {
-  props: ['contentNext']
+  props: ['contentNext', 'dummyProp'],
+  setup(){
+
+    return {}
+  }
 
 }
 </script>

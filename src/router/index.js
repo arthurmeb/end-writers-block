@@ -7,12 +7,14 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    props: true
   },
   {
     path: '/playground',
     name: 'playground',
-    component: PlaygroundView
+    component: PlaygroundView,
+    props: true
   },
   {
     path: '/settings',
