@@ -6,6 +6,7 @@
 
 <script>
 
+import { provide } from "vue"
 import { useRoute } from "vue-router"
 import NaviBar from "./components/NaviBar.vue"
 
@@ -19,15 +20,23 @@ export default ({
 
     let currentPage = useRoute()
 
-    // define SSOT for user log in state (will base on firebase when integrated)
+    // define SSOT for user log in state (will base on firebase when integrated) USE APP.PROVIDE
 
     let loggedIn = true
 
+    // define user's current stats 
 
-    // this was a test to see what useRoute returns.. it returns just the path for ex /settings
-    console.log('App vue route is:' + useRoute().path)
+    const currentDay = 0
+    const maxDays = 0
+    const streak = 0
+    const amount = 0
 
-    return {loggedIn, currentPage}
+    // methods to track stats
+
+
+
+
+    return {loggedIn, currentPage, dummyProp, currentDay, maxDays, streak, amount}
   },
 })
 
@@ -64,7 +73,4 @@ footer {
   border: 2px solid #000000;
 }
 
-.horizontal-group {
-  border: 2px solid #000000;
-}
 </style>

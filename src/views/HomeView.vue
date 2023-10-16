@@ -1,20 +1,23 @@
 <template>
   <div class="home">
 
-    <h1>This is the homepage</h1>
-
-    <div v-if="wrong">
-      <ExplanationBox/>
-    </div>
+    <h1>This is the homepage. Content: {{ content }}</h1>
 
     <div>
-      <HomeContent/>
-    </div>
+      <i class="fas fa-arrow-left" @click="contentBack" v-if="content >= 0 && content != 1"></i>
+      <div v-if="content == 0">
+        <ExplanationBox :contentNext="contentNext"/>
+      </div>
 
-    <div v-if="wrong">
-      <CreditCard/>
-    </div>
+      <div v-if="content == 1">
+        <HomeContent :contentNext="contentNext" :contentBack="contentBack"/>
+      </div>
 
+      <div v-if="content == 2">
+        <CreditCard :contentNext="contentNext" :contentBack="contentBack"/>
+      </div>
+
+    </div>
   </div>
 </template>
 
@@ -22,21 +25,21 @@
 import HomeContent from "@/components/hero/HomeContent.vue"
 import ExplanationBox from "@/components/hero/ExplanationBox.vue"
 import CreditCard from "@/components/hero/CreditCard.vue"
+import { ref } from 'vue'
 
 
 
 export default {
   name: 'HomeView',
   components: { HomeContent, ExplanationBox, CreditCard },
-  props: [''],
 
   setup(){
+    let yes = true
+    let content = ref(0)
+    const contentNext = () => {content.value++, console.log(content)}
+    const contentBack = () => {content.value--, console.log(content)}
 
-    let wrong = false
-
-
-
-    return {wrong}
+    return {content, contentNext, contentBack, yes}
   }
 
 }

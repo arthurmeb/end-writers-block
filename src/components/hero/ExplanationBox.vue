@@ -1,13 +1,17 @@
 <template>
-  <div></div>
+  <div>
+    <h1>explanation box</h1>
+    <button class="light-btn" @click="contentNext">next view</button>
+  </div>
 </template>
 
 <script>
 export default {
+  props: ['contentNext']
 
 }
 </script>
 
 <style>
 
-</style>>
+</style>

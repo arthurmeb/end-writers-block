@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>redundant i think</div>
 </template>
 
 <script>
