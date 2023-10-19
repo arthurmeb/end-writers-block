@@ -6,7 +6,6 @@
 
 <script>
 
-import { provide } from "vue"
 import { useRoute } from "vue-router"
 import NaviBar from "./components/NaviBar.vue"
 
@@ -36,7 +35,7 @@ export default ({
 
 
 
-    return {loggedIn, currentPage, dummyProp, currentDay, maxDays, streak, amount}
+    return {loggedIn, currentPage, currentDay, maxDays, streak, amount}
   },
 })
 

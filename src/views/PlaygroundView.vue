@@ -5,7 +5,7 @@
     <div>
 
       <div class="card">
-        <h3>Day {{ currentDay }} of {{ maxDays }}</h3>
+        <h3>Day {{ currentDay }} of {{ lintMaxDays }}</h3>
       </div>
 
       <div class="card">
@@ -13,13 +13,13 @@
       </div>
 
       <div class="card">
-        <h3>{{ amount }} paid in laziness</h3>
+        <h3>{{ lintDailyAmount }} paid in laziness</h3>
       </div>
 
       <!-- The Quill editor -->
       <div id="editor" @paste.prevent>End Writers Block was made for one simple reason.</div>
 
-      <p>uhh{{ minWords }}/words</p>
+      <p>{{wordCount}}/{{ lintMinWords }}words</p>
       <button class="dark-btn" v-if="button">submit</button>
 
     </div>
@@ -33,7 +33,7 @@
 
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
-
+import {minWords, maxDays, dailyAmount} from 'c:/Users/APMeb/OneDrive/Documents/web-apps/end-writers-block/src/store'
 
 export default { 
   components: {  },
@@ -46,10 +46,18 @@ export default {
   });
   },
   setup() {
+    console.log(minWords, dailyAmount, maxDays)
+
+    // Track Quill current word count
+    const wordCount = 0
 
     //const button = () => {if ()} 
 
-    return {}
+    let lintMinWords = minWords
+    let lintDailyAmount = dailyAmount
+    let lintMaxDays = maxDays
+
+    return {lintMinWords, lintDailyAmount, lintMaxDays, wordCount}
 
   }
 }
