@@ -1,5 +1,6 @@
 <template>
-  <NaviBar :currentPage="currentPage" :loggedIn="loggedIn"/>
+  <NaviBar @loginPressed="toggleLogin" :currentPage="currentPage" :loggedIn="loggedIn"/>
+  <LoginModal  v-if="loginMode"/>
   <router-view/>
   <footer> Footer | By Beboo - Twitter | Email </footer>
 </template>
@@ -8,12 +9,21 @@
 
 import { useRoute } from "vue-router"
 import NaviBar from "./components/NaviBar.vue"
+import LoginModal from "@/components/LoginModal.vue"
+import { ref } from "vue"
 
 
 
 export default ({
-  components: {NaviBar},
+  components: {NaviBar, LoginModal},
   setup() {
+
+    // show login modal
+
+    let loginMode = ref(false)
+    let toggleLogin = () => {loginMode.value = !loginMode.value, console.log(loginMode.value)}
+
+
 
     // Create prop that will pass user's current page to the navbar component
 
@@ -21,7 +31,7 @@ export default ({
 
     // define SSOT for user log in state (will base on firebase when integrated) USE APP.PROVIDE
 
-    let loggedIn = true
+    let loggedIn = false
 
     // define user's current stats 
 
@@ -35,7 +45,7 @@ export default ({
 
 
 
-    return {loggedIn, currentPage, currentDay, maxDays, streak, amount}
+    return {loggedIn, currentPage, currentDay, maxDays, streak, amount, toggleLogin, loginMode}
   },
 })
 

@@ -12,6 +12,7 @@ export default {
   name: 'SettingsView',
 
   setup() {
+    //delete all data and the router impoort
     console.log('App vue route is:' + useRoute().path)
     const paste = (evt) => {console.log('you just pasted didnt you', evt)}
 

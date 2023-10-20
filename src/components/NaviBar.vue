@@ -4,12 +4,12 @@
 
         <!-- Show login button whenever user not loggedin-->
 
-        <button class="light btn" @click="loginModal" v-if="!loggedIn">Log in</button>
+        <button class="light btn" @click="$emit('loginPressed')" v-if="!loggedIn">Log in</button>
  
 
         <!-- Show logout button whenever user is loggedin-->
 
-        <button class="dark btn" @click="registerModal" v-if="loggedIn">Log out</button>
+        <button class="dark btn" @click="logout" v-if="loggedIn">Log out</button>
 
 
         <!-- Show settings button whenever user loggedin && page is not settings-->
@@ -31,9 +31,11 @@
   <script>
   export default {
     props: ['loggedIn', 'currentPage'],
-
     setup() {
-        
+        // handle firebase logout
+        const logout = () => {}
+
+        return {logout, }        
     }
   
   }
