@@ -1,5 +1,5 @@
 <template>
-  <NaviBar @loginPressed="toggleLogin" @logout="handleLogout" :currentPage="currentPage" :loggedIn="loggedIn"/>
+  <NaviBar @bebe="hello" @loggoutPressed="loggemOut" @loginPressed="toggleLogin" :currentPage="currentPage" :loggedIn="loggedIn"/>
   <LoginModal  @loginDone="toggleLogin" v-if="loginMode"/>
   <router-view/>
   <footer> Footer | By Beboo - Twitter | Email </footer>
@@ -7,10 +7,12 @@
 
 <script>
 
+import { useRouter } from "vue-router"
 import { useRoute } from "vue-router"
 import NaviBar from "./components/NaviBar.vue"
 import LoginModal from "@/components/LoginModal.vue"
-import { ref } from "vue"
+import { onMounted, ref } from "vue"
+import {onAuthStateChanged, getAuth, signOut} from "firebase/auth"
 
 
 
@@ -18,37 +20,50 @@ export default ({
   components: {NaviBar, LoginModal},
   setup() {
 
+    const hello = () => {console.log('yo')}
+
+    const router = useRouter()
+
     // show login modal
 
     let loginMode = ref(false)
 
     let toggleLogin = () => {loginMode.value = !loginMode.value, console.log(loginMode.value, 'loginMode toggled')}
 
-
-
     // Create prop that will pass user's current page to the navbar component
 
     let currentPage = useRoute()
 
-    // define SSOT for user log in state (will base on firebase when integrated) USE APP.PROVIDE
-
+    // checks user sign in state when app is mounted. Toggle loggedIn variable for navbar based on firebase provided user state
     let loggedIn = ref(false)
+    let auth
 
-    const handleLogout = () => {}
+    let loggemOut = () => {console.log('event emitted'), signOut(getAuth()).then(() => {router.push('/'), console.log('signed out')})}
 
-    // define user's current stats 
+    onMounted(()=> {
+      auth = getAuth()
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          loggedIn.value = true
+          console.log('user is logged in')
+        }
+        else {
+          loggedIn.value = false
+          console.log('user is logged out')
+        }
+      })
+    })
 
-    const currentDay = 0
-    const maxDays = 0
-    const streak = 0
-    const amount = 0
+    // logout user when navbar logout button is pressed and send to homepage
+
+
 
     // methods to track stats
 
 
 
 
-    return {loggedIn, currentPage, currentDay, maxDays, streak, amount, toggleLogin, loginMode, handleLogout}
+    return {loggedIn, currentPage, toggleLogin, loginMode, loggemOut, auth, router, hello}
   },
 })
 

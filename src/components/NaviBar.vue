@@ -9,13 +9,13 @@
 
         <!-- Show logout button whenever user is loggedin-->
 
-        <button class="dark btn" @click="$emit('logout')" v-if="loggedIn">Log out</button>
+        <button class="dark btn" @click="$emit('loggoutPressed')" v-if="loggedIn">Log out</button>
 
 
         <!-- Show settings button whenever user loggedin && page is not settings-->
 
         <router-link to="/settings" v-if="loggedIn && currentPage.path != '/settings'" >
-            <button class=""> Settings </button>
+            <button class="" @click="$emit('bebe')"> Settings </button>
         </router-link> 
 
         
@@ -29,12 +29,15 @@
 </template>
   
   <script>
-  export default {
+  export default ({
     props: ['loggedIn', 'currentPage'],
     setup() {  
+        const loggg = () => {console.log('received')}
+    return {loggg}        
     }
   
-  }
+
+  })
   </script>
   
   <style>
