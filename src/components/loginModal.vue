@@ -11,6 +11,7 @@
             </div>
             <div>
                 <button @click="register">Sign up</button>
+                
                 <button @click="signGoogle">Sign in with Google</button>
                 <button @click="signApple">Sign in with Apple</button>
             </div>
@@ -22,13 +23,14 @@
         <!--Login modal-->
     <div class="backdrop" v-if="!signup">
         <div class="popup" v-if="!signup">
-            <h1> Login doeeee</h1>
+            <h1> Login doeeeeeeeee</h1>
             <div>
                 <input type="email" required label="email">
                 <input type="password" required label="password">
+                <p v-if="loginError">{{ loginError }}</p>
             </div>
             <div>
-                <button @click="login">Sign up</button>
+                <button @click="login">Log in</button>
                 <button @click="loginGoogle">Login in with Google</button>
                 <button @click="loginApple">Login in with Apple</button> 
             </div>
@@ -41,7 +43,7 @@
 
 <script>
 import { ref } from 'vue'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from 'vue-router';
 
 
@@ -54,17 +56,17 @@ export default {
     let signup = ref(true)
     let toggleMode = () => {signup.value = !signup.value}
 
-    // sign in sign up flow
+    // sign up flow
 
     const email = ref('')
     const password = ref('')
+    let loginError = ref()
 
     const register = () => {
         createUserWithEmailAndPassword(getAuth(), email.value, password.value)
         .then(() => {
             console.log('Gg u registered buddy');
             router.push('/playground')
-            toggleMode()
             emit('loginDone')
         })
         .catch((error) => {
@@ -72,6 +74,26 @@ export default {
             alert(error.message);
         });
     }
+
+        // log in flow
+
+        const login = () => {
+        signInWithEmailAndPassword(getAuth(), email.value, password.value)
+        .then(() => {
+            console.log('You logged in buddy')
+            router.push('/playground')
+            emit('loginDone')
+        })
+        .catch((error) => {
+            console.log(error.code);
+            loginError.value = error.code
+            alert(error.message);
+        });
+    }
+
+
+
+        // Oauth
 
     const signGoogle = () => {
 
@@ -83,7 +105,7 @@ export default {
 
     // @click for backdrop
 
-    return {signup, toggleMode, email, password, register, signApple, signGoogle, router}
+    return {signup, toggleMode, email, password, register, signApple, signGoogle, router, login, loginError}
 
     }
 }

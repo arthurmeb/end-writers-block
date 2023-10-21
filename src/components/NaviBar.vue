@@ -9,7 +9,7 @@
 
         <!-- Show logout button whenever user is loggedin-->
 
-        <button class="dark btn" @click="logout" v-if="loggedIn">Log out</button>
+        <button class="dark btn" @click="$emit('logout')" v-if="loggedIn">Log out</button>
 
 
         <!-- Show settings button whenever user loggedin && page is not settings-->
@@ -31,11 +31,7 @@
   <script>
   export default {
     props: ['loggedIn', 'currentPage'],
-    setup() {
-        // handle firebase logout
-        const logout = () => {}
-
-        return {logout, }        
+    setup() {  
     }
   
   }

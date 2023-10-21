@@ -1,5 +1,5 @@
 <template>
-  <NaviBar @loginPressed="toggleLogin"  :currentPage="currentPage" :loggedIn="loggedIn"/>
+  <NaviBar @loginPressed="toggleLogin" @logout="handleLogout" :currentPage="currentPage" :loggedIn="loggedIn"/>
   <LoginModal  @loginDone="toggleLogin" v-if="loginMode"/>
   <router-view/>
   <footer> Footer | By Beboo - Twitter | Email </footer>
@@ -21,8 +21,8 @@ export default ({
     // show login modal
 
     let loginMode = ref(false)
-    let toggleLogin = () => {loginMode.value = !loginMode.value, console.log(loginMode.value)}
 
+    let toggleLogin = () => {loginMode.value = !loginMode.value, console.log(loginMode.value, 'loginMode toggled')}
 
 
 
@@ -32,7 +32,9 @@ export default ({
 
     // define SSOT for user log in state (will base on firebase when integrated) USE APP.PROVIDE
 
-    let loggedIn = false
+    let loggedIn = ref(false)
+
+    const handleLogout = () => {}
 
     // define user's current stats 
 
@@ -46,7 +48,7 @@ export default ({
 
 
 
-    return {loggedIn, currentPage, currentDay, maxDays, streak, amount, toggleLogin, loginMode}
+    return {loggedIn, currentPage, currentDay, maxDays, streak, amount, toggleLogin, loginMode, handleLogout}
   },
 })
 
