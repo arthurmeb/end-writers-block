@@ -1,6 +1,6 @@
 <template>
-  <NaviBar @loginPressed="toggleLogin" :currentPage="currentPage" :loggedIn="loggedIn"/>
-  <LoginModal  v-if="loginMode"/>
+  <NaviBar @loginPressed="toggleLogin"  :currentPage="currentPage" :loggedIn="loggedIn"/>
+  <LoginModal  @loginDone="toggleLogin" v-if="loginMode"/>
   <router-view/>
   <footer> Footer | By Beboo - Twitter | Email </footer>
 </template>
@@ -22,6 +22,7 @@ export default ({
 
     let loginMode = ref(false)
     let toggleLogin = () => {loginMode.value = !loginMode.value, console.log(loginMode.value)}
+
 
 
 

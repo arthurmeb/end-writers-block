@@ -44,7 +44,7 @@ export default {
 
     const contentBack = () => {content.value--, console.log(content)}
 
-    return {content, contentNext, contentBack, loginMode, loginPressed}
+    return {content, contentNext, contentBack}
   }
 
 }

@@ -48,6 +48,9 @@ export default {
   setup() {
     console.log(minWords, dailyAmount, maxDays)
 
+    let streak = 0
+    let currentDay = 1
+
     // Track Quill current word count
     const wordCount = 0
 
@@ -57,7 +60,7 @@ export default {
     let lintDailyAmount = dailyAmount
     let lintMaxDays = maxDays
 
-    return {lintMinWords, lintDailyAmount, lintMaxDays, wordCount}
+    return {lintMinWords, lintDailyAmount, lintMaxDays, wordCount, streak, currentDay}
 
   }
 }
