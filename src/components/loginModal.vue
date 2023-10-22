@@ -25,8 +25,8 @@
         <div class="popup" v-if="!signup">
             <h1> Login doeeeeeeeee</h1>
             <div>
-                <input type="email" required label="email">
-                <input type="password" required label="password">
+                <input type="email" required label="email" v-model="email">
+                <input type="password" required label="password" v-model="password">
                 <p v-if="loginError">{{ loginError }}</p>
             </div>
             <div>
@@ -48,6 +48,7 @@ import { useRouter } from 'vue-router';
 
 
 export default {
+    emits: ['loginDone'],
     setup(props, {emit}){
     const router = useRouter()
 
@@ -124,8 +125,6 @@ export default {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-
-
 }
 .popup {
     background-color: #fefefe;

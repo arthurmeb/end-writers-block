@@ -1,22 +1,43 @@
 <template>
-  <div class="home">
-    <h1>This is the settings page</h1>
+  <div class="box">
+    <div>
+      <h1>Settings</h1>
+      <h3 @click="view = 0">Account details</h3>
+      <h3 @click="view++">Card details</h3>
+    </div>
+
+    <div v-if="view == 0"> 
+      <button>Reset password </button>
+      <p>Challenge a friend</p>
+    </div>
+
+    <div v-if="view == 1">
+      <button>Click here to change credit card info</button>
+    </div>
+
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 
-import { useRoute } from 'vue-router'
 
 export default {
   name: 'SettingsView',
 
   setup() {
-    //delete all data and the router impoort
-    console.log('App vue route is:' + useRoute().path)
-    const paste = (evt) => {console.log('you just pasted didnt you', evt)}
 
-    return {paste}
+    let view = ref(0)
+
+
+    return {view}
   }
 }
 </script>
+
+<style scoped>
+.box{
+  display: flex;
+  justify-content: space-between;
+}
+</style>

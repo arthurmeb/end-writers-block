@@ -1,5 +1,5 @@
 <template>
-  <NaviBar @bebe="hello" @loggoutPressed="loggemOut" @loginPressed="toggleLogin" :currentPage="currentPage" :loggedIn="loggedIn"/>
+  <NaviBar @loggoutPressed="loggemOut" @loginPressed="toggleLogin" :currentPage="currentPage" :loggedIn="loggedIn"/>
   <LoginModal  @loginDone="toggleLogin" v-if="loginMode"/>
   <router-view/>
   <footer> Footer | By Beboo - Twitter | Email </footer>
@@ -19,8 +19,6 @@ import {onAuthStateChanged, getAuth, signOut} from "firebase/auth"
 export default ({
   components: {NaviBar, LoginModal},
   setup() {
-
-    const hello = () => {console.log('yo')}
 
     const router = useRouter()
 
@@ -63,7 +61,7 @@ export default ({
 
 
 
-    return {loggedIn, currentPage, toggleLogin, loginMode, loggemOut, auth, router, hello}
+    return {loggedIn, currentPage, toggleLogin, loginMode, loggemOut, auth, router}
   },
 })
 
