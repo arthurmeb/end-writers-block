@@ -1,5 +1,6 @@
 <template>
   <NaviBar @loggoutPressed="loggemOut" @loginPressed="toggleLogin" :currentPage="currentPage" :loggedIn="loggedIn"/>
+  <h1> firebase data is: {{ firebaseData }}</h1>
   <LoginModal  @loginDone="toggleLogin" v-if="loginMode"/>
   <router-view/>
   <footer> Footer | By Beboo - Twitter | Email </footer>
@@ -13,7 +14,8 @@ import NaviBar from "./components/NaviBar.vue"
 import LoginModal from "@/components/LoginModal.vue"
 import { onMounted, ref } from "vue"
 import {onAuthStateChanged, getAuth, signOut} from "firebase/auth"
-
+import {db} from './main.js'
+import { Firestore } from "firebase/firestore"
 
 
 export default ({
@@ -52,14 +54,10 @@ export default ({
       })
     })
 
-    // logout user when navbar logout button is pressed and send to homepage
-
-
-
     // methods to track stats
 
-
-
+    // save user data to firebase
+    console.log(db,Firestore)
 
     return {loggedIn, currentPage, toggleLogin, loginMode, loggemOut, auth, router}
   },
