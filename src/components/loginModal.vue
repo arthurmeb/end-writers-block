@@ -13,7 +13,6 @@
                 <button @click="register">Sign up</button>
                 
                 <button @click="signGoogle">Sign in with Google</button>
-                <button @click="signApple">Sign in with Apple</button>
             </div>
             <p>Have an account? <span style="color: blue;" @click="toggleMode">Log in</span></p>
         </div>
@@ -31,8 +30,7 @@
             </div>
             <div>
                 <button @click="login">Log in</button>
-                <button @click="loginGoogle">Login in with Google</button>
-                <button @click="loginApple">Login in with Apple</button> 
+                <button @click="signGoogle">Login in with Google</button>
             </div>
             <p>New? <span style="color: blue;" @click="toggleMode">Register</span></p>
         </div>
@@ -43,7 +41,7 @@
 
 <script>
 import { ref } from 'vue'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useRouter } from 'vue-router';
 
 
@@ -97,16 +95,21 @@ export default {
         // Oauth
 
     const signGoogle = () => {
-
-    }
-
-    const signApple = () => {
-
+        const provider = new GoogleAuthProvider()
+        signInWithPopup(getAuth(), provider)
+        .then((result) => {
+            console.log(result.user)
+            router.push("/playground")
+            emit('loginDone')
+        })
+        .catch((error) => {
+            console.log(error)
+        })
     }
 
     // @click for backdrop
 
-    return {signup, toggleMode, email, password, register, signApple, signGoogle, router, login, loginError}
+    return {signup, toggleMode, email, password, register, signGoogle, router, login, loginError}
 
     }
 }
