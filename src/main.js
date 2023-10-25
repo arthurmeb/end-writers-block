@@ -19,10 +19,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-
 const db = getFirestore(app)
 
 createApp(App).use(router).mount('#app')
 
-export {db, app}
+export {db}
 
